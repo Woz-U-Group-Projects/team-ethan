@@ -29,6 +29,13 @@ class Task extends React.Component {
     });
   };
 
+  deleteTask = (taskToDelete) => {
+    let url = `http://localhost:8080/tasks/${taskToDelete}`;
+    axios.delete(url).then(response => {
+
+    });
+  };
+
 
   render() {
     return (
@@ -39,7 +46,7 @@ class Task extends React.Component {
         <ul>
           {this.state.tasks.map(p => (
             <li key={p.taskid}>
-              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success">Complete</button><button type="button" className="btn btn-danger">Delete</button>
+              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success">Complete</button><button type="button" className="btn btn-danger" onClick={this.deleteTask(p.id)}>Delete</button>
             </li>
           ))}
         </ul>
