@@ -31,8 +31,9 @@ class Task extends React.Component {
 
   deleteTask = (taskToDelete) => {
     let url = `http://localhost:8080/tasks/${taskToDelete}`;
-    axios.delete(url).then(response => {
-
+    let header = {headers:('Access-Control-Allow-Origin: *')};
+    axios.delete(url, header).then(response => {
+      this.getData();
     });
   };
 
