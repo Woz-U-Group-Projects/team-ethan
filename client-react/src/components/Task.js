@@ -29,14 +29,23 @@ class Task extends React.Component {
     });
   };
 
-  deleteTask = (taskToDelete) => {
-    let url = `http://localhost:8080/tasks/${taskToDelete}`;
-    let header = {headers:('Access-Control-Allow-Origin: *')};
-    axios.delete(url, header).then(response => {
+  completeTask = (taskToComplete) => {
+    let url = `http://localhost:8080/tasks/${taskToComplete}`;
+    let header = {headers: {'Access-Control-Allow-Origin': '*'}};
+    let currentTask = axios.get(url);
+    axios.put(url, {name: currentTask.name, complete: true},header).then(response => {
       this.getData();
     });
   };
 
+  deleteTask = (taskToDelete) => {
+    let url = `http://localhost:8080/tasks/${taskToDelete}`;
+    let header = {headers: {'Access-Control-Allow-Origin': '*'}};
+    axios.delete(url, header).then(response => {
+      this.getData();
+    });
+  };
+  
 
   render() {
     return (
@@ -47,7 +56,7 @@ class Task extends React.Component {
         <ul>
           {this.state.tasks.map(p => (
             <li key={p.taskid}>
-              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success">Complete</button><button type="button" className="btn btn-danger" onClick={this.deleteTask(p.id)}>Delete</button>
+              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success" onClick={this.completeTask(p.id)}>Complete</button><button type="button" className="btn btn-danger" /*onClick={this.deleteTask(p.id)}*/>Delete</button>
             </li>
           ))}
         </ul>
