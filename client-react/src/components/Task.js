@@ -58,7 +58,7 @@ class Task extends React.Component {
         <ul>
           {this.state.tasks.map(p => (
             <li key={p.taskid}>
-              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success" onClick= {() => {this.completeTask(p.id)}}>Complete</button><button type="button" className="btn btn-danger" onClick={this.deleteTask(p.id)}>Delete</button>
+              {p.name} : { p.complete ? "complete" : "not complete" } <button type="button" className="btn btn-success" onClick= {() => {this.completeTask(p.id)}}>Complete</button><button type="button" className="btn btn-danger" onClick={() => {this.deleteTask(p.id)}}>Delete</button>
             </li>
           ))}
         </ul>
