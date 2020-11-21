@@ -33,10 +33,8 @@ class Task extends React.Component {
     let url = `http://localhost:8080/tasks/${taskToComplete}`;
     axios.get(url).then(response => {
         axios.put(url, {name: response.data.name, complete: true, id: response.data.id}).then(response => {
-      this.getData();
+          this.getData();
     });
-    
-   alert(response.data.name+ " was completed!");
     });
   };
   
@@ -53,6 +51,7 @@ class Task extends React.Component {
     return (
       <div>
         <h3>List of tasks (React)</h3>
+        <button type="button" onClick= {() => {this.getData()}}>See Tasks</button>
         <input ref={this.taskName} />
         <button type="button" className="btn btn-primary" onClick={this.addTask}>add</button>
         <ul>

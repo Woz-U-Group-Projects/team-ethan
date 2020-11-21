@@ -49,12 +49,14 @@ public class TaskController {
   public Task addTask(@RequestBody Task task) {
     return taskRepository.save(task);
   }
-
+  
+  @CrossOrigin(origins = "http://localhost:3000")
   @DeleteMapping("/{id}")
   public void deleteTask(@PathVariable Long id) {
     taskRepository.deleteById(id);
   }
 
+  @CrossOrigin(origins = "http://localhost:3000")
   @PutMapping("/{id}")
   public Task updateProject(@PathVariable Long id, @RequestBody Task task) {
     Task foundTask = taskRepository.findById(id).orElse(null);
