@@ -30,12 +30,12 @@ public class TaskController {
 
   @Autowired
   TaskRepository taskRepository;
-
+  @CrossOrigin(origins = "http://localhost:3000/tasks")
   @GetMapping()
   public List<Task> getTasks() {
     return taskRepository.findAll();
   }
-  
+  @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/{id}")
   public Task getTask(@PathVariable Long id) {
 	  Task foundTask = taskRepository.findById(id).orElse(null);
@@ -44,7 +44,7 @@ public class TaskController {
 	    }
 	    return null;
 	  }
-
+  @CrossOrigin(origins = "http://localhost:3000")
   @PostMapping()
   public Task addTask(@RequestBody Task task) {
     return taskRepository.save(task);
