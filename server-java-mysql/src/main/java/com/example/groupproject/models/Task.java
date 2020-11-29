@@ -15,8 +15,17 @@ public class Task {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String name;
+  private Long createdBy;
   @Column(columnDefinition = "boolean default false")
   private boolean complete;
+  
+  public Long getCreatedBy() {
+	    return this.createdBy;
+	  }
+
+	  public void setCreatedBy(Long createdBy) {
+	    this.createdBy = createdBy;
+	  }
 
   public Long getId() {
     return this.id;

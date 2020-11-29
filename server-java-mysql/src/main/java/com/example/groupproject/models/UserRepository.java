@@ -1,4 +1,4 @@
-package com.example.groupproject.auth;
+package com.example.groupproject.models;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

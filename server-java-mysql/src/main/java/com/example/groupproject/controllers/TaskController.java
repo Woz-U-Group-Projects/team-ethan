@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,7 @@ public class TaskController {
 
   @Autowired
   TaskRepository taskRepository;
+  
   @GetMapping()
   public List<Task> getTasks() {
     return taskRepository.findAll();
@@ -44,6 +47,18 @@ public class TaskController {
 	    }
 	    return null;
 	  }
+  
+  @GetMapping("/user/{user}")
+  public List<Task> getTasksByUser(@PathVariable Long user) {
+	 ExampleMatcher customExampleMatcher = ExampleMatcher.matching().withMatcher("user", ExampleMatcher.GenericPropertyMatchers.exact());
+	 Task fakeTask = new Task(); fakeTask.setCreatedBy(user);
+	 Example<Task> example = Example.of(fakeTask, customExampleMatcher);
+	 if(taskRepository.findAll(example) != null) {
+		 return taskRepository.findAll(example);
+	 } else {
+		 return null;
+	 }
+  }
 
   @PostMapping()
   public Task addTask(@RequestBody Task task) {

@@ -1,27 +1,34 @@
 import React from "react";
 import axios from "axios";
-import '../task.min.css'
+import '../task.min.css';
+
+
 class Task extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tasks: [] };
     this.taskName = React.createRef();
+    this.user = React.createRef();
+    this.user = null;
   }
 
   componentDidMount() {
+    if(document.getElementById("user").innerHTML != null){
+      this.user = document.getElementById("user").innerHTML.split(":").pop();
+    }
     this.getData();
   }
 
   getData = () => {
 
     // Spring uses port 8080 (react uses 3000)
-    let url = "http://localhost:8080/tasks";
+    let url = "http://localhost:8080/tasks/user/" + this.user;
     axios.get(url).then(response => this.setState({ tasks: response.data }));
   };
 
   addTask = () => {
     let url = "http://localhost:8080/tasks";
-    axios.post(url, { name: this.taskName.current.value }).then(response => {
+    axios.post(url, { name: this.taskName.current.value, createdBy: this.user}).then(response => {
       // refresh the data
       this.getData();
       // empty the input

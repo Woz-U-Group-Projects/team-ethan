@@ -8,12 +8,16 @@ class Signin extends React.Component {
         this.password = React.createRef();
     }
     signInUser = () => {
-        let url = "http://localhost:8080/login";
-        axios.get(url, { username: this.username.current.value, password: this.password.current.value }).then(response => {
-          if(response.data.username === this.username && response.data.password === this.password){
-            console.log("Successfully Added User");
+        let url = "http://localhost:8080/login/" + this.username.current.value;
+        axios.get(url).then(response => {
+           if(response.data.username === this.username.current.value && response.data.password === this.password.current.value){
+            alert("Successfully Logged In");
+            console.log(response);
+            document.getElementById("user").innerHTML = "User: " + response.data.id;
           } else {
-            console.log("Unsuccessful Login");
+            alert("Unsuccessful Login");
+            console.log(response);
+            console.log(this.password);
           }
         });
     };

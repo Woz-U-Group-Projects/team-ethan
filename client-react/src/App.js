@@ -18,6 +18,7 @@ const App = () => (
         <li>
           <Link to= "/register">Register </Link>
         </li>
+        <h4 id="user"></h4>
       </ul>
 
       <hr />
