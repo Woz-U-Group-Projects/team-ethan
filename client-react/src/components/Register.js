@@ -15,7 +15,7 @@ class Register extends React.Component {
     };
     render() {
         return (
-            <div>
+            <div align="center">
                 <h1>Register</h1>
                 <div>
                     <label>User Name: <input type="text" ref={this.username} /></label>

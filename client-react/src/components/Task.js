@@ -56,10 +56,9 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>List of tasks (React)</h3>
-        <button type="button" onClick= {() => {this.getData()}}>See Tasks</button>
-        <input ref={this.taskName} />
+      <div align="center">
+        <h3>Your Tasks</h3>
+        <input ref={this.taskName}/>
         <button type="button" className="btn btn-primary" onClick={this.addTask}>add</button>
         <ul>
           {this.state.tasks.map(p => (
